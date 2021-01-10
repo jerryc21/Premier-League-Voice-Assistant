@@ -1,17 +1,16 @@
-import requests
-import json
-
 
 import speech_recognition as sr
 import re
 import threading
 import time
 
+import requests
+import json
 import pyttsx3
 
 API_KEY="tJX123RE0dAt"
 PROJECT_TOKEN="tODKhwTx-jAT"
-RUN_TOKEN="tLo318zSTSDG"
+RUN_TOKEN="ts5EnyUrCpw-"
 
 class Data:
     def __init__(self, api_key, project_token):
@@ -60,24 +59,25 @@ def get_audio():
         except Exception as e:
             print("Exception:", str(e))
 
+
     return said.lower()
 
 def main():
-    print("Started Program")
+    print("Program has started")
     data = Data(API_KEY, PROJECT_TOKEN)
     END_PHRASE = "stop"
     club_list = data.get_list_of_clubs()
 
-
-
+    UPDATE_COMMAND = "update"
     
     CLUB_PATTERNS = {
-                    re.compile("[\w\s]+ wins [\w\s]+"): lambda epl: data.get_list_of_clubs(epl)['wins'],
-                    re.compile("[\w\s]+ loses [\w\s]+"): lambda epl: data.get_list_of_clubs(epl)['loses'],
-                    re.compile("[\w\s]+ points [\w\s]+"): lambda epl: data.get_list_of_clubs(epl)['points'],
+                    re.compile("[\w\s]+ wins [\w\s]+"): lambda epl: data.get_club_info(epl)['wins'],
+                    re.compile("[\w\s]+ loses [\w\s]+"): lambda epl: data.get_club_info(epl)['loses'],
+                    re.compile("[\w\s]+ points [\w\s]+"): lambda epl: data.get_club_info(epl)['points'],
+                    re.compile("[\w\s]+ position [\w\s]+"): lambda epl: data.get_club_info(epl)['position'],
                     }
 
-    UPDATE_COMMAND = "update"
+    
 
     while True:
         print("Listening...")
@@ -104,6 +104,7 @@ def main():
         if text.find(END_PHRASE) != -1:
             print("Exit")
             break
+
 
 main()
     
