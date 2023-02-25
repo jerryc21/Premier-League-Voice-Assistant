@@ -8,9 +8,9 @@ import requests
 import json
 import pyttsx3
 
-API_KEY="tJX123RE0dAt"
-PROJECT_TOKEN="tODKhwTx-jAT"
-RUN_TOKEN="ts5EnyUrCpw-"
+API_KEY=""
+PROJECT_TOKEN=" "
+RUN_TOKEN="-"
 
 class Data:
     def __init__(self, api_key, project_token):
